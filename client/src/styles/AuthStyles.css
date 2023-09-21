@@ -1,0 +1,53 @@
+/* ====================================
+===========Register Page ============ */
+
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    flex-direction: column;
+    background: linear-gradient(grey, transparent);
+}
+
+.form-container form{
+    box-shadow: black 0px 5px 15px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.form-container form .title{
+    text-align: center;
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: "Playfair Display", serif;
+}
+
+.form-container form input{
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+}
+
+.form-container form button{
+    border: 1px solid black;
+    border-radius: 0;
+    background-color: black;
+    color: white;
+    width: 250px;
+}
+
+.form-container form button:hover{
+    border: 1px solid black;
+    background: black;
+    background: -webkit-linear-gradient(
+        to right,
+        #434343,
+        black
+    );
+    background: linear-gradient(
+        to right,
+        #434343,
+        black
+    );
+}

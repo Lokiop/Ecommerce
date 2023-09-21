@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
+const cors = require('cors')
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ connectDB();
 
 //middlewares
 app.use(express.json());
+app.use(cors());
 app.use(morgan('dev'));
 
 //routes

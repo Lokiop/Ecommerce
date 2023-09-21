@@ -8,26 +8,36 @@ const registerController = async (req, res) => {
 
         //validation
         if (!name) {
-            return res.status(404).send({ error: 'Name is required' });
+            return res.status.send({
+                success: false, message: 'Name is required'
+            });
         }
         if (!email) {
-            return res.status(404).send({ error: 'Email is required' });
+            return res.status.send({
+                success: false, message: 'Email is required'
+            });
         }
         if (!password) {
-            return res.status(404).send({ error: 'Password is required' });
+            return res.status.send({
+                success: false, message: 'Password is required'
+            });
         }
         if (!phone) {
-            return res.status(404).send({ error: 'Phone is required' });
+            return res.status.send({
+                success: false, message: 'Phone is required'
+            });
         }
         if (!address) {
-            return res.status(404).send({ error: 'Address is required' });
+            return res.status.send({
+                success: false, message: 'Address is required'
+            });
         }
 
         //Check user
         const existinguser = await User.findOne({ email })
         if (existinguser) {
             return res.status(200).send({
-                success: true,
+                success: false,
                 message: 'Email already registered. Please login'
             })
         }
@@ -46,7 +56,7 @@ const registerController = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send({
+        res.status.send({
             success: false,
             message: 'Error in Registration',
             error
@@ -60,7 +70,7 @@ const loginController = async (req, res) => {
         const { email, password } = req.body;
         //validation
         if (!email || !password) {
-            return res.status(404).send({
+            return res.status.send({
                 success: false,
                 message: 'Email or Password missing'
             })
@@ -68,7 +78,7 @@ const loginController = async (req, res) => {
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).send({
+            return res.send({
                 success: false,
                 message: 'Email is not registered'
             })
@@ -100,7 +110,7 @@ const loginController = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.status(500).send({
+        res.status.send({
             success: false,
             message: 'Error in Login',
             error
