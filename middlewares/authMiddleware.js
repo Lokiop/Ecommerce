@@ -9,7 +9,7 @@ const requireSignIn = async (req, res, next) => {
         next();
     } catch (error) {
         console.log(error);
-        res.status(500).send({
+        res.status(200).send({
             success: false,
             error
         })
@@ -28,7 +28,7 @@ const isAdmin = async (req, res, next) => {
         next();
     } catch (error) {
         console.log(error);
-        res.status(500).send({
+        res.status(200).send({
             success: false,
             message: 'Error in Admin Middleware',
             error
