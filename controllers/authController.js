@@ -4,7 +4,7 @@ const JWT = require('jsonwebtoken');
 
 const registerController = async (req, res) => {
     try {
-        const { name, email, password, phone, address } = req.body;
+        const { name, email, password, phone, address, answer } = req.body;
 
         //validation
         if (!name) {
@@ -32,6 +32,11 @@ const registerController = async (req, res) => {
                 success: false, message: 'Address is required'
             });
         }
+        if (!answer) {
+            return res.status.send({
+                success: false, message: 'Answer is required'
+            });
+        }
 
         //Check user
         const existinguser = await User.findOne({ email })
@@ -45,8 +50,11 @@ const registerController = async (req, res) => {
         //register user
         const hashedPassword = await hashPassword(password);
 
+        //answer to lowercase
+        const ans = answer.toLowerCase();
+
         //save
-        const user = await new User({ name, email, phone, address, password: hashedPassword }).save();
+        const user = await new User({ name, email, phone, address, password: hashedPassword, answer: ans }).save();
 
         res.status(201).send({
             success: true,
@@ -56,7 +64,7 @@ const registerController = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status.send({
+        res.status(200).send({
             success: false,
             message: 'Error in Registration',
             error
@@ -118,8 +126,59 @@ const loginController = async (req, res) => {
     }
 }
 
+//forgotPasswordController
+const forgotPasswordController = async (req, res) => {
+    try {
+        const { email, answer, newPassword } = req.body;
+        if (!email) {
+            res.status(200).send({
+                success: false,
+                message: 'Email is required'
+            })
+        }
+        if (!answer) {
+            res.status(200).send({
+                success: false,
+                message: 'Answer is required'
+            })
+        }
+        if (!newPassword) {
+            res.status(200).send({
+                success: false,
+                message: 'New Password is required'
+            })
+        }
+
+        const ans = answer.toLowerCase();
+
+        //check
+        const user = await User.findOne({ email, answer: ans });
+
+        if (!user) {
+            return res.status(200).send({
+                success: false,
+                message: 'Wrong Email or Password'
+            })
+        }
+
+        const hashedPassword = await hashPassword(newPassword);
+        await User.findByIdAndUpdate(user._id, { password: hashedPassword })
+        res.status(200).send({
+            success: true,
+            message: 'Password Updated Successfully'
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(200).send({
+            success: false,
+            message: 'Something went wrong',
+            error
+        })
+    }
+}
+
 const testController = (req, res) => {
     res.send("Protected Route");
 }
 
-module.exports = { registerController, loginController, testController };
+module.exports = { registerController, loginController, testController, forgotPasswordController };

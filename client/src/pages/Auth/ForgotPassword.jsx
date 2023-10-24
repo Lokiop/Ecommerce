@@ -5,35 +5,28 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import "../../styles/AuthStyles.css";
 
-const Register = () => {
-  const [name, setName] = useState("");
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [answer, setAnswer] = useState("");
 
   const navigate = useNavigate();
 
-  //This happens on submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/auth/register`,
+        `${process.env.REACT_APP_API}/api/auth/forgot-password`,
         {
-          name,
           email,
-          password,
-          phone,
-          address,
+          newPassword,
           answer,
         }
       );
 
       if (res.data.success) {
-        toast.success(res.data.message);
         navigate("/login");
+        toast.success("res.data.message");
       } else {
         toast.error(res.data.message);
       }
@@ -44,23 +37,10 @@ const Register = () => {
   };
 
   return (
-    <Layout title={"Register"}>
+    <Layout title={"Forgot Password"}>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
-          <h4 className="title">Register Form</h4>
-          <div className="mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              placeholder="Enter Your Name"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              required
-            />
-          </div>
+          <h4 className="title">Reset Password</h4>
           <div className="mb-3">
             <input
               type="email"
@@ -78,37 +58,11 @@ const Register = () => {
             <input
               type="password"
               className="form-control"
-              id="password"
-              placeholder="Enter Your Password"
-              value={password}
+              id="newPassword"
+              placeholder="Enter Your New Password"
+              value={newPassword}
               onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="phone"
-              placeholder="Enter Your Phone Number"
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="address"
-              placeholder="Enter Your Address"
-              value={address}
-              onChange={(e) => {
-                setAddress(e.target.value);
+                setNewPassword(e.target.value);
               }}
               required
             />
@@ -127,7 +81,7 @@ const Register = () => {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Submit
+            Reset
           </button>
         </form>
       </div>
@@ -135,4 +89,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default ForgotPassword;
