@@ -42,3 +42,13 @@ Change the register page and the register controller<br/>
 Add an endpint for the forgot password. Make one controller for it<br/>
 One page for the forgot password and a button in login page for the same<br/>
 <br/>
+
+==============Admin and the User Panel/Dashboard================<br/>
+Create Admin Menu<br/>
+Create a page for admin Panel<br/>
+create required pages for the items in the menu(Create Category, Create Product, All Users)<br/>
+
+Create User Menu<br/>
+Use this menu in the dashboard<br/>
+Create required pages for the items in the menu(Profile, Orders)<br/>
+<br/>

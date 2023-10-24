@@ -25,8 +25,8 @@ const ForgotPassword = () => {
       );
 
       if (res.data.success) {
-        navigate("/login");
         toast.success("res.data.message");
+        navigate("/login");
       } else {
         toast.error(res.data.message);
       }
