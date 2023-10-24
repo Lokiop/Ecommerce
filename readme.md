@@ -52,3 +52,16 @@ Create User Menu<br/>
 Use this menu in the dashboard<br/>
 Create required pages for the items in the menu(Profile, Orders)<br/>
 <br/>
+
+===============New Model for Category====================<br/>
+Create new Schema for category<br/>
+Create category Routes folder and create category<br/> path(requiresSignIn, isAdmin)<br/>
+Test it using Postman<br/>
+One Controller for updating the category(requiresSignIn, isAdmin)<br/>
+One for getting all Categories<br/>
+One for getting a single category<br/>
+One for deleting category(requiresSignIn, isAdmin)<br/>
+<br/>
+Packages:<br/>
+Slugify: Converts space (" ") to hyphen ("-")<br/>
+<br/>
