@@ -1,6 +1,5 @@
-const { default: slugify } = require("slugify");
+const slugify = require("slugify");
 const categoryModel = require("../models/categoryModel");
-const { findById } = require("../models/userModel");
 
 const createCategoryController = async (req, res) => {
     try {

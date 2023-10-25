@@ -4,7 +4,8 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
-const categoryRoutes = require('./routes/categoryRoutes')
+const categoryRoutes = require('./routes/categoryRoutes');
+const productRoutes = require('./routes/productRoutes');
 const cors = require('cors')
 
 dotenv.config();
@@ -22,7 +23,8 @@ app.use(morgan('dev'));
 
 //routes
 app.use('/api/auth', authRoutes);
-app.use('/api/category', categoryRoutes)
+app.use('/api/category', categoryRoutes);
+app.use('/api/product', productRoutes);
 
 //api
 app.get('/', (req, res) => {

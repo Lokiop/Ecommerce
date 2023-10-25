@@ -55,7 +55,7 @@ Create required pages for the items in the menu(Profile, Orders)<br/>
 
 ===============New Model for Category====================<br/>
 Create new Schema for category<br/>
-Create category Routes folder and create category<br/> path(requiresSignIn, isAdmin)<br/>
+Create category Routes folder and create category path(requiresSignIn, isAdmin)<br/>
 Test it using Postman<br/>
 One Controller for updating the category(requiresSignIn, isAdmin)<br/>
 One for getting all Categories<br/>
@@ -64,4 +64,17 @@ One for deleting category(requiresSignIn, isAdmin)<br/>
 <br/>
 Packages:<br/>
 Slugify: Converts space (" ") to hyphen ("-")<br/>
+<br/>
+
+================New Model for Product and Crud apis for it==========================<br/>
+create product endpoint and a controller for it. Accept form data as it may consist of images
+(requiresSignIn, isAdmin, express-formidable-v2)<br/>
+update products endpoint and a controller for it(requiresSignIn, isAdmin)<br/>
+get products endpoint and a controller for it<br/>
+get single product endpoint and a controller for it<br/>
+get photo endpoint and a controller for it<br/>
+delete product endpoint and a controller for it(requiresSignIn, isAdmin)<br/>
+<br/>
+Packages:<br/>
+express-formidable-v2 : As we have to store images in the database, we will have to parse the images<br/>
 <br/>
