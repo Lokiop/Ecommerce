@@ -78,3 +78,9 @@ delete product endpoint and a controller for it(requiresSignIn, isAdmin)<br/>
 Packages:<br/>
 express-formidable-v2 : As we have to store images in the database, we will have to parse the images<br/>
 <br/>
+
+====================Frontend for Category=======================
+Design create Category page and integrate with the backend
+
+Packages:
+antd: for modal
