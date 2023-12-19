@@ -15,7 +15,7 @@ const CreateProduct = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [shipping, setShipping] = useState("");
+  const [shipping, setShipping] = useState("0");
   const [photo, setPhoto] = useState("");
 
   //create Product function
@@ -38,7 +38,7 @@ const CreateProduct = () => {
         toast.success("Product Created Successfully");
         navigate("/dashboard/admin/products");
       } else {
-        toast.error(data.message);
+        toast.error(data.error);
       }
     } catch (error) {
       console.log(error);
@@ -156,13 +156,14 @@ const CreateProduct = () => {
               <div className="mb-3">
                 <Select
                   bordered={false}
-                  placeholder="Select Shipping "
+                  placeholder="Select Shipping"
                   size="medium"
                   showSearch
                   className="form-select mb-3"
                   onChange={(value) => {
                     setShipping(value);
                   }}
+                  required
                 >
                   <Option value="0">No</Option>
                   <Option value="1">Yes</Option>
