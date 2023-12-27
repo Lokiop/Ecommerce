@@ -26,6 +26,7 @@ const Products = () => {
   useEffect(() => {
     getAllProducts();
   }, []);
+
   return (
     <Layout>
       <div className="container-fluid m-3 p-3">
