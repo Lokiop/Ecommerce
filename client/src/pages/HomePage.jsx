@@ -5,31 +5,19 @@ import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
 import { useNavigate } from "react-router-dom";
+import useCategory from "../components/hooks/useCategory";
 
 const HomePage = () => {
   const navigate = useNavigate();
   // const [auth] = useAuth();
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  //get all categories
-  const getAllCategory = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/category/get-category`
-      );
-      if (data?.success) {
-        setCategories(data?.categories);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const categories = useCategory();
 
   //get all products
   const getAllProducts = async () => {
@@ -78,7 +66,6 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    getAllCategory();
     getTotal();
     //eslint-disable-next-line
   }, []);
@@ -171,7 +158,7 @@ const HomePage = () => {
                     <p className="card-text"> ₹ {p.price}</p>
                     <button
                       className="btn btn-primary m-1"
-                      onClick={() => navigate(`product/${p.slug}`)}
+                      onClick={() => navigate(`/product/${p.slug}`)}
                     >
                       More Details
                     </button>

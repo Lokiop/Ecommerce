@@ -1,6 +1,7 @@
 const fs = require('fs');
 const productModel = require('../models/productModel');
 const slugify = require('slugify');
+const categoryModel = require('../models/categoryModel');
 
 //Create a product
 const createProductController = async (req, res) => {
@@ -282,9 +283,29 @@ const relatedProductController = async (req, res) => {
     }
 }
 
+const productCategoryController = async (req, res) => {
+    try {
+        const { slug } = req.params;
+        const category = await categoryModel.findOne({ slug });
+        const products = await productModel.find({ category }).populate("category");
+        res.status(200).send({
+            success: true,
+            category,
+            products
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(200).send({
+            success: false,
+            message: "Error in Category wise proudct selection api",
+            error
+        })
+    }
+}
+
 
 module.exports = {
     createProductController, getProductController, updateProductController,
     getSingleProductController, productPhotoController, deleteProductController, productFilterController,
-    productCountController, productListController, searchProductController, relatedProductController
+    productCountController, productListController, searchProductController, relatedProductController, productCategoryController
 }
