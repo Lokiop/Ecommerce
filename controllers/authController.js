@@ -182,4 +182,33 @@ const testController = (req, res) => {
     res.send("Protected Route");
 }
 
-module.exports = { registerController, loginController, testController, forgotPasswordController };
+const updateProfileController = async (req, res) => {
+    try {
+        const { name, email, password, phone, address } = req.body;
+        const user = await User.findById(req.user._id);
+
+        const hashedPassword = password ? await hashPassword(password) : undefined;
+        const updatedUser = await User.findByIdAndUpdate(req.user._id, {
+            name: name || user?.name,
+            password: hashedPassword || user.password,
+            email: email,
+            address: address || user.address,
+            phone: phone || user.phone
+        }, { new: true })
+
+        res.status(200).send({
+            success: true,
+            message: "User Profile updated successfully",
+            updatedUser
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(200).send({
+            success: false,
+            message: "Error in update prodile api",
+            error
+        })
+    }
+}
+
+module.exports = { registerController, loginController, testController, forgotPasswordController, updateProfileController };
